@@ -130,6 +130,113 @@
         font-size: 1rem;
       }
 
+      .content-stack {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .content-stack section {
+        border-radius: 20px;
+        background: var(--surface-lowest);
+        padding: 24px;
+      }
+
+      .section-title {
+        margin-bottom: 16px;
+        font-family: "Manrope", "Inter", sans-serif;
+        font-size: clamp(1.4rem, 3.8vw, 2rem);
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+
+      .benefit-list,
+      .trust-list,
+      .process-steps {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+
+      .benefit-list li,
+      .trust-list li,
+      .process-steps li {
+        display: block;
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--surface-low);
+        border-radius: 14px;
+        color: var(--text-muted);
+      }
+
+      .process-steps li {
+        position: relative;
+        padding-left: 46px;
+      }
+
+      .process-steps li::before {
+        content: attr(data-step);
+        position: absolute;
+        left: 14px;
+        top: 12px;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+
+      .faq-list {
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      details {
+        border-radius: 14px;
+        padding: 14px 16px;
+        background: var(--surface-low);
+      }
+
+      summary {
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+        list-style: none;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::after {
+        content: "+";
+        float: right;
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+
+      details[open] summary::after {
+        content: "−";
+      }
+
+      details p {
+        margin-top: 10px;
+        color: var(--text-muted);
+      }
+
+      .final-cta {
+        text-align: left;
+      }
+
       .cta-section {
         margin-top: 18px;
         background: var(--surface);
@@ -169,7 +276,8 @@
         }
 
         .hero,
-        .cta-section {
+        .cta-section,
+        .content-stack section {
           border-radius: 20px;
           padding: 24px;
         }
@@ -181,7 +289,7 @@
       <header class="section-card">
         <nav class="top-nav" aria-label="주요 내비게이션">
           <div class="top-nav__brand">AI 코드 어시스턴트 교육</div>
-          <a class="cta-link" href="#cta">카카오톡으로 상담받기</a>
+          <a class="cta-link" href="#final-cta">카카오톡으로 상담받기</a>
         </nav>
       </header>
 
@@ -191,16 +299,67 @@
             <h1 class="hero__title">비개발자도 이해하는 실전 AI 코드 어시스턴트</h1>
             <p class="hero__intro">실제 업무에 바로 반영할 수 있는 실습 위주의 교육으로, AI를 어렵게 느끼는 40대 학습자도 쉽게 시작할 수 있습니다.</p>
             <div class="hero__actions">
-              <a class="cta-link" href="#cta">카카오톡으로 상담받기</a>
+              <a class="cta-link" href="#final-cta">카카오톡으로 상담받기</a>
             </div>
           </section>
         </div>
 
-        <div class="section-card" id="cta-wrap">
-          <section id="cta" class="cta-section">
-            <h2>지금 바로 상담하고 시작해보세요.</h2>
-            <p>카카오톡에서 상담 가능한 시간을 정해 정확한 학습 시작 전략을 안내해 드립니다.</p>
-            <a class="cta-link" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+        <div class="content-stack section-card">
+          <section id="benefits">
+            <h2 class="section-title">프로그램 효과</h2>
+            <ul class="benefit-list">
+              <li>반복적인 코드 작성·수정 작업 시간을 크게 단축할 수 있습니다.</li>
+              <li>실무 과제를 기반으로 바로 적용 가능한 실습을 통해 즉시 활용 가능한 역량을 키웁니다.</li>
+              <li>어려운 개념도 직관적인 단계로 풀어 설명해 부담 없이 따라올 수 있습니다.</li>
+            </ul>
+          </section>
+
+          <section id="process">
+            <h2 class="section-title">진행 방식</h2>
+            <ol class="process-steps">
+              <li data-step="1">카카오톡으로 상담 신청 후 학습 목적을 공유합니다.</li>
+              <li data-step="2">현재 수준을 점검하고 1:1 맞춤 학습 플랜을 제안합니다.</li>
+              <li data-step="3">실제 업무 상황을 반영한 수업을 진행하고 피드백을 반복합니다.</li>
+            </ol>
+          </section>
+
+          <section id="trust">
+            <h2 class="section-title">신뢰 근거</h2>
+            <ul class="trust-list">
+              <li>비개발 배경 학습자를 위해 설계한 이해 중심 커리큘럼입니다.</li>
+              <li>질문 1개당 24시간 내 응답을 목표로 운영합니다.</li>
+              <li>중요한 실습 결과물은 단계별로 점검해 실전 적용률을 높입니다.</li>
+            </ul>
+          </section>
+
+          <section id="faq">
+            <h2 class="section-title">자주 묻는 질문</h2>
+            <div class="faq-list">
+              <details>
+                <summary>비개발자인데도 충분히 따라갈 수 있나요?</summary>
+                <p>가능합니다. 기본부터 시작해 실무에서 바로 필요한 부분 위주로 진행합니다.</p>
+              </details>
+              <details>
+                <summary>어느 정도의 시간이 걸리나요?</summary>
+                <p>주간 이용 가능 시간과 학습 목표에 따라 4주~8주로 맞춤 조정합니다.</p>
+              </details>
+              <details>
+                <summary>수업 전에 준비해야 할 것이 있나요?</summary>
+                <p>노트북과 인터넷, 간단한 메모장 환경만 있으면 처음부터 시작 가능합니다.</p>
+              </details>
+              <details>
+                <summary>상담은 어떤 방식으로 진행되나요?</summary>
+                <p>카카오톡으로 스케줄을 정한 뒤, 일정에 맞춰 전화 대신 채팅 기반으로 진행합니다.</p>
+              </details>
+            </div>
+          </section>
+
+          <section id="final-cta" class="final-cta">
+            <div class="cta-section">
+              <h2>지금 수준에 맞춘 맞춤 안내를 받으세요.</h2>
+              <p>목표를 함께 정하면 바로 교육 시작 플랜을 안내해 드립니다.</p>
+              <a class="cta-link" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+            </div>
           </section>
         </div>
       </main>
