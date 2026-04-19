@@ -10,16 +10,18 @@
     />
     <style>
       :root {
-        --bg: #f7f9fb;
+        --bg: #f4f6fb;
         --surface: #ffffff;
-        --surface-low: #f2f4f6;
-        --surface-lowest: #ffffff;
-        --surface-variant: #e0e3e5;
-        --primary: #003d9b;
-        --primary-container: #0052cc;
-        --text: #191c1e;
-        --text-muted: #434654;
-        --outline: rgba(195, 198, 214, 0.45);
+        --surface-soft: #f2f5fa;
+        --surface-subtle: #edf1f7;
+        --surface-border: #dbe3ee;
+        --surface-strong: #e7edf5;
+        --text: #1d2736;
+        --text-muted: #485466;
+        --primary: #1f56cc;
+        --primary-strong: #1b4ec0;
+        --outline: rgba(29, 49, 82, 0.18);
+        --outline-strong: rgba(29, 49, 82, 0.3);
       }
 
       * {
@@ -35,8 +37,12 @@
       body {
         font-family: "Inter", -apple-system, sans-serif;
         color: var(--text);
-        background: var(--bg);
-        line-height: 1.6;
+        background:
+          radial-gradient(circle at 14% -6%, #f9fbff 0%, transparent 26%),
+          radial-gradient(circle at 86% 0%, #f4f8ff 0%, transparent 24%),
+          var(--bg);
+        line-height: 1.72;
+        -webkit-font-smoothing: antialiased;
       }
 
       .site-shell {
@@ -47,34 +53,45 @@
 
       .top-nav {
         margin: 16px;
-        border-radius: 12px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 12px;
         padding: 14px 18px;
-        background: var(--surface);
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 10px 24px rgba(17, 34, 64, 0.06);
       }
 
       .top-nav__brand {
         font-family: "Manrope", "Inter", sans-serif;
         font-weight: 800;
         letter-spacing: -0.02em;
-        font-size: 1.1rem;
+        font-size: 1.16rem;
       }
 
       .cta-link {
         text-decoration: none;
         color: #ffffff;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
         border-radius: 999px;
-        padding: 10px 16px;
+        padding: 10px 18px;
         font-weight: 700;
-        font-size: 0.95rem;
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-size: 0.97rem;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow: 0 6px 16px rgba(13, 53, 127, 0.2);
+        transition: transform 140ms ease, filter 140ms ease;
+      }
+
+      .cta-link:hover,
+      .cta-link:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
       }
 
       main {
-        padding: 16px 16px 40px;
+        padding: 16px 16px 44px;
       }
 
       .section-card {
@@ -83,40 +100,44 @@
       }
 
       .hero {
-        margin-top: 12px;
-        padding: 34px 28px;
-        background: var(--surface-lowest);
+        margin-top: 14px;
+        padding: 36px clamp(22px, 5vw, 38px);
+        border: 1px solid var(--outline);
+        background: var(--surface);
         border-radius: 24px;
+        box-shadow: 0 12px 34px rgba(16, 32, 63, 0.05);
       }
 
       .hero::before {
         content: "";
         display: block;
         height: 1px;
-        width: 72px;
-        background: var(--outline);
+        width: 74px;
+        background: var(--outline-strong);
         margin-bottom: 18px;
       }
 
       h1,
       h2,
       h3,
-      p {
+      p,
+      li {
         margin: 0;
       }
 
       .hero__title {
-        margin-bottom: 14px;
+        margin-bottom: 16px;
         font-family: "Manrope", "Inter", sans-serif;
-        font-size: clamp(2rem, 5.3vw, 3rem);
-        line-height: 1.18;
-        letter-spacing: -0.025em;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.2;
+        letter-spacing: -0.028em;
       }
 
       .hero__intro {
         color: var(--text-muted);
         margin-bottom: 28px;
-        font-size: 1.05rem;
+        font-size: 1.08rem;
+        line-height: 1.82;
         max-width: 54ch;
       }
 
@@ -135,20 +156,21 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 28px;
+        gap: 30px;
       }
 
       .content-stack section {
-        border-radius: 20px;
-        background: var(--surface-lowest);
-        padding: 24px;
+        border-radius: 22px;
+        border: 1px solid var(--outline);
+        background: var(--surface);
+        padding: 28px;
       }
 
       .section-title {
-        margin-bottom: 16px;
+        margin-bottom: 18px;
         font-family: "Manrope", "Inter", sans-serif;
-        font-size: clamp(1.4rem, 3.8vw, 2rem);
-        line-height: 1.25;
+        font-size: clamp(1.5rem, 3.6vw, 2rem);
+        line-height: 1.28;
         letter-spacing: -0.02em;
       }
 
@@ -159,58 +181,65 @@
         padding: 0;
         list-style: none;
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
 
       .benefit-list li,
       .trust-list li,
       .process-steps li {
-        display: block;
         width: 100%;
-        padding: 14px 16px;
-        background: var(--surface-low);
+        padding: 16px 18px;
+        background: linear-gradient(170deg, var(--surface-soft), var(--surface-subtle));
+        border: 1px solid var(--surface-strong);
         border-radius: 14px;
         color: var(--text-muted);
+        font-size: 1.01rem;
+        line-height: 1.8;
       }
 
       .process-steps li {
         position: relative;
-        padding-left: 46px;
+        padding-left: 48px;
       }
 
       .process-steps li::before {
         content: attr(data-step);
         position: absolute;
-        left: 14px;
-        top: 12px;
+        left: 15px;
+        top: 16px;
         width: 22px;
         height: 22px;
         border-radius: 999px;
         display: inline-grid;
         place-items: center;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
         color: #fff;
         font-weight: 700;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
+        line-height: 1;
+        box-shadow: 0 2px 8px rgba(28, 76, 173, 0.28);
       }
 
       .faq-list {
         margin: 0;
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
 
       details {
         border-radius: 14px;
         padding: 14px 16px;
-        background: var(--surface-low);
+        border: 1px solid var(--outline);
+        background: linear-gradient(180deg, #ffffff, #f7f9fc);
       }
 
       summary {
-        font-weight: 600;
+        font-weight: 700;
         color: var(--text);
         cursor: pointer;
         list-style: none;
+        font-size: 1.02rem;
+        line-height: 1.55;
       }
 
       summary::-webkit-details-marker {
@@ -221,7 +250,9 @@
         content: "+";
         float: right;
         color: var(--primary);
-        font-size: 1.2rem;
+        font-size: 1.35rem;
+        line-height: 1;
+        transform: translateY(2px);
       }
 
       details[open] summary::after {
@@ -229,8 +260,10 @@
       }
 
       details p {
-        margin-top: 10px;
+        margin-top: 12px;
         color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 1.01rem;
       }
 
       .final-cta {
@@ -238,32 +271,40 @@
       }
 
       .cta-section {
-        margin-top: 18px;
+        margin-top: 8px;
         background: var(--surface);
-        border-radius: 22px;
-        padding: 26px;
+        border-radius: 24px;
+        padding: 30px;
         min-height: 172px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        gap: 14px;
+        gap: 16px;
+        border: 1px solid var(--outline);
       }
 
       .cta-section h2 {
         font-family: "Manrope", "Inter", sans-serif;
-        font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+        font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+        line-height: 1.27;
         letter-spacing: -0.02em;
       }
 
       .cta-section p {
         color: var(--text-muted);
         max-width: 54ch;
+        font-size: 1.04rem;
+        line-height: 1.75;
+      }
+
+      .cta-section .cta-link {
+        margin-top: 2px;
       }
 
       @media (max-width: 760px) {
         .top-nav {
-          margin: 10px;
+          margin: 12px;
           padding: 12px 14px;
         }
 
@@ -272,14 +313,110 @@
         }
 
         main {
-          padding: 10px 10px 32px;
+          padding: 12px 12px 36px;
         }
 
         .hero,
         .cta-section,
         .content-stack section {
           border-radius: 20px;
+          padding: 26px;
+        }
+
+        .hero__title {
+          margin-bottom: 14px;
+        }
+      }
+
+      @media (max-width: 390px) {
+        .top-nav,
+        .hero,
+        .content-stack section,
+        .cta-section,
+        main {
+          margin-inline: 0;
+        }
+
+        .top-nav {
+          margin: 10px 10px 6px;
+          padding: 12px;
+          border-radius: 14px;
+        }
+
+        .top-nav__brand {
+          max-width: 56%;
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+
+        .cta-link {
+          padding: 10px 14px;
+          font-size: 0.95rem;
+        }
+
+        main {
+          padding: 10px 10px 34px;
+        }
+
+        .section-card,
+        .content-stack {
+          width: 100%;
+        }
+
+        .hero {
+          margin-top: 0;
           padding: 24px;
+          border-radius: 18px;
+        }
+
+        .content-stack {
+          gap: 22px;
+        }
+
+        .content-stack section,
+        .cta-section {
+          padding: 20px;
+          border-radius: 18px;
+        }
+
+        .section-title {
+          font-size: 1.35rem;
+          margin-bottom: 14px;
+        }
+
+        .hero__title {
+          font-size: 1.86rem;
+          line-height: 1.22;
+        }
+
+        .hero__intro,
+        .cta-section p,
+        .benefit-list li,
+        .trust-list li,
+        .process-steps li,
+        details p,
+        summary {
+          font-size: 1rem;
+          line-height: 1.78;
+        }
+
+        .benefit-list li,
+        .trust-list li,
+        .process-steps li {
+          padding: 14px 14px 14px 44px;
+        }
+
+        .process-steps li::before {
+          left: 12px;
+          top: 15px;
+        }
+
+        .hero__actions {
+          gap: 10px;
+        }
+
+        details {
+          padding: 13px;
         }
       }
     </style>
@@ -346,7 +483,7 @@
               </details>
               <details>
                 <summary>준비물은 무엇인가요?</summary>
-                <p>필수 준비물은 컴퓨터(노트북 또는 데스크탑)와 안정적인 인터넷 연결입니다. 수업 전 간단한 채팅 계정(카카오톡 계정)과 사용 가능한 환경이면 시작할 수 있습니다.</p>
+                <p>필수 준비물은 컴퓨터(노트북 또는 데스크톱)와 안정적인 인터넷 연결입니다. 수업 전 간단한 채팅 계정(카카오톡 계정)과 사용 가능한 환경이면 시작할 수 있습니다.</p>
               </details>
               <details>
                 <summary>수강 전 상담이 가능한가요?</summary>
