@@ -37,6 +37,7 @@
       body {
         margin: 0;
         padding: 0;
+        scroll-behavior: smooth;
       }
 
       body {
@@ -68,6 +69,7 @@
         background: rgba(255, 255, 255, 0.97);
         border: 1px solid var(--surface-border);
         box-shadow: 0 10px 24px rgba(17, 34, 64, 0.06);
+        flex-wrap: wrap;
       }
 
       .top-nav__brand {
@@ -75,6 +77,30 @@
         font-weight: 800;
         letter-spacing: -0.02em;
         font-size: 1.16rem;
+      }
+
+      .top-nav__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        margin-left: auto;
+      }
+
+      .top-nav__link {
+        text-decoration: none;
+        color: #42506c;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        line-height: 1;
+        transition: color 120ms ease, background-color 120ms ease;
+      }
+
+      .top-nav__link:hover,
+      .top-nav__link:focus-visible {
+        color: var(--primary);
+        background: #edf1f8;
       }
 
       .cta-link {
@@ -88,6 +114,12 @@
         border: 1px solid rgba(255, 255, 255, 0.28);
         box-shadow: 0 6px 16px rgba(13, 53, 127, 0.2);
         transition: transform 140ms ease, filter 140ms ease;
+      }
+
+      .top-nav__cta {
+        padding: 9px 16px;
+        border-radius: 999px;
+        white-space: nowrap;
       }
 
       .cta-link:hover,
@@ -471,7 +503,14 @@
       <header class="section-card">
         <nav class="top-nav" aria-label="주요 내비게이션">
           <div class="top-nav__brand">AI 코드 어시스턴트 교육</div>
-          <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/o/example" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+          <div class="top-nav__links" aria-label="빠른 이동">
+            <a class="top-nav__link" href="#benefits">효과</a>
+            <a class="top-nav__link" href="#process">진행 방식</a>
+            <a class="top-nav__link" href="#trust">신뢰 근거</a>
+            <a class="top-nav__link" href="#faq">FAQ</a>
+            <a class="top-nav__link" href="#final-cta">신청하기</a>
+          </div>
+          <a class="cta-link top-nav__cta" data-role="kakao-cta" href="https://open.kakao.com/o/example" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
         </nav>
       </header>
 
@@ -479,7 +518,7 @@
         <div class="section-card" id="hero-wrap">
           <section id="hero" class="hero">
             <h1 class="hero__title">비개발자도 이해하는 실전 AI 코드 어시스턴트</h1>
-            <p class="hero__intro">실제 업무에 바로 반영할 수 있는 실습 위주의 교육으로, AI를 어렵게 느끼는 40대 학습자도 쉽게 시작할 수 있습니다.</p>
+            <p class="hero__intro">실제 업무에 바로 반영할 수 있는 실습 위주의 교육으로, AI를 어렵게 느끼는 40대 학습자도 쉽게 시작할 수 있습니다. 복잡한 이론보다 실습 중심.</p>
             <div class="hero__actions">
               <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/o/example" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
             </div>
