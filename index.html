@@ -1,1 +1,613 @@
-hello world 1
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 코드 어시스턴트 교육 프로그램</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fb;
+        --surface: #ffffff;
+        --surface-soft: #f2f5fa;
+        --surface-subtle: #edf1f7;
+        --surface-border: #dbe3ee;
+        --surface-strong: #e7edf5;
+        --text: #1d2736;
+        --text-muted: #485466;
+        --primary: #1f56cc;
+        --primary-strong: #1b4ec0;
+        --outline: rgba(29, 49, 82, 0.18);
+        --outline-strong: rgba(29, 49, 82, 0.3);
+        --sticky-cta-padding-y: 10px;
+        --sticky-cta-safe-area: env(safe-area-inset-bottom);
+        --sticky-cta-content-height: 39px;
+        --sticky-cta-height: calc(var(--sticky-cta-content-height) + (var(--sticky-cta-padding-y) * 2) + var(--sticky-cta-safe-area));
+        --sticky-cta-body-padding: 0px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 14% -6%, #f9fbff 0%, transparent 26%),
+          radial-gradient(circle at 86% 0%, #f4f8ff 0%, transparent 24%),
+          var(--bg);
+        line-height: 1.72;
+        -webkit-font-smoothing: antialiased;
+        padding-bottom: var(--sticky-cta-body-padding);
+      }
+
+      .site-shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .top-nav {
+        margin: 16px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 10px 24px rgba(17, 34, 64, 0.06);
+        flex-wrap: wrap;
+      }
+
+      .top-nav__brand {
+        font-family: "Manrope", "Inter", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        font-size: 1.16rem;
+      }
+
+      .top-nav__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        margin-left: auto;
+      }
+
+      .top-nav__link {
+        text-decoration: none;
+        color: #42506c;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        line-height: 1;
+        transition: color 120ms ease, background-color 120ms ease;
+      }
+
+      .top-nav__link:hover,
+      .top-nav__link:focus-visible {
+        color: var(--primary);
+        background: #edf1f8;
+      }
+
+      .cta-link {
+        text-decoration: none;
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 700;
+        font-size: 0.97rem;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow: 0 6px 16px rgba(13, 53, 127, 0.2);
+        transition: transform 140ms ease, filter 140ms ease;
+      }
+
+      .top-nav__cta {
+        padding: 9px 16px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .cta-link:hover,
+      .cta-link:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+      }
+
+      main {
+        padding: 16px 16px 44px;
+      }
+
+      .section-card {
+        width: min(980px, 100%);
+        margin: 0 auto;
+      }
+
+      .hero {
+        margin-top: 14px;
+        padding: 36px clamp(22px, 5vw, 38px);
+        border: 1px solid var(--outline);
+        background: var(--surface);
+        border-radius: 24px;
+        box-shadow: 0 12px 34px rgba(16, 32, 63, 0.05);
+      }
+
+      .hero::before {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 74px;
+        background: var(--outline-strong);
+        margin-bottom: 18px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      li {
+        margin: 0;
+      }
+
+      .hero__title {
+        margin-bottom: 16px;
+        font-family: "Manrope", "Inter", sans-serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.2;
+        letter-spacing: -0.028em;
+      }
+
+      .hero__intro {
+        color: var(--text-muted);
+        margin-bottom: 28px;
+        font-size: 1.08rem;
+        line-height: 1.82;
+        max-width: 54ch;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero__actions .cta-link {
+        font-size: 1rem;
+      }
+
+      .content-stack {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .content-stack section {
+        border-radius: 22px;
+        border: 1px solid var(--outline);
+        background: var(--surface);
+        padding: 28px;
+      }
+
+      .section-title {
+        margin-bottom: 18px;
+        font-family: "Manrope", "Inter", sans-serif;
+        font-size: clamp(1.5rem, 3.6vw, 2rem);
+        line-height: 1.28;
+        letter-spacing: -0.02em;
+      }
+
+      .benefit-list,
+      .trust-list,
+      .process-steps {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .benefit-list li,
+      .trust-list li,
+      .process-steps li {
+        width: 100%;
+        padding: 16px 18px;
+        background: linear-gradient(170deg, var(--surface-soft), var(--surface-subtle));
+        border: 1px solid var(--surface-strong);
+        border-radius: 14px;
+        color: var(--text-muted);
+        font-size: 1.01rem;
+        line-height: 1.8;
+      }
+
+      .process-steps li {
+        position: relative;
+        padding-left: 48px;
+      }
+
+      .process-steps li::before {
+        content: attr(data-step);
+        position: absolute;
+        left: 15px;
+        top: 16px;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.78rem;
+        line-height: 1;
+        box-shadow: 0 2px 8px rgba(28, 76, 173, 0.28);
+      }
+
+      .faq-list {
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      details {
+        border-radius: 14px;
+        padding: 14px 16px;
+        border: 1px solid var(--outline);
+        background: linear-gradient(180deg, #ffffff, #f7f9fc);
+      }
+
+      summary {
+        font-weight: 700;
+        color: var(--text);
+        cursor: pointer;
+        list-style: none;
+        font-size: 1.02rem;
+        line-height: 1.55;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      summary::after {
+        content: "+";
+        float: right;
+        color: var(--primary);
+        font-size: 1.35rem;
+        line-height: 1;
+        transform: translateY(2px);
+      }
+
+      details[open] summary::after {
+        content: "−";
+      }
+
+      details p {
+        margin-top: 12px;
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 1.01rem;
+      }
+
+      .final-cta {
+        text-align: left;
+      }
+
+      .cta-section {
+        margin-top: 8px;
+        background: var(--surface);
+        border-radius: 24px;
+        padding: 30px;
+        min-height: 172px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 16px;
+        border: 1px solid var(--outline);
+      }
+
+      .cta-section h2 {
+        font-family: "Manrope", "Inter", sans-serif;
+        font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+        line-height: 1.27;
+        letter-spacing: -0.02em;
+      }
+
+      .cta-section p {
+        color: var(--text-muted);
+        max-width: 54ch;
+        font-size: 1.04rem;
+        line-height: 1.75;
+      }
+
+      .cta-section .cta-link {
+        margin-top: 2px;
+      }
+
+      .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        padding: var(--sticky-cta-padding-y) 16px calc(var(--sticky-cta-padding-y) + var(--sticky-cta-safe-area));
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid var(--outline);
+        box-shadow: 0 -8px 22px rgba(16, 32, 63, 0.09);
+        display: none;
+      }
+      .sticky-cta .cta-link {
+        width: 100%;
+        text-align: center;
+        display: block;
+      }
+
+      .fallback-contact {
+        margin-top: 12px;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--text-muted);
+      }
+
+      .fallback-contact a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      @media (max-width: 760px) {
+        .top-nav {
+          margin: 12px;
+          padding: 12px 14px;
+        }
+
+        .top-nav__brand {
+          font-size: 1rem;
+        }
+
+        .sticky-cta {
+          display: block;
+        }
+
+        :root {
+          --sticky-cta-body-padding: var(--sticky-cta-height);
+        }
+
+        main {
+          padding: 12px 12px 36px;
+        }
+
+        .hero,
+        .cta-section,
+        .content-stack section {
+          border-radius: 20px;
+          padding: 26px;
+        }
+
+        .hero__title {
+          margin-bottom: 14px;
+        }
+      }
+
+      @media (max-width: 390px) {
+        .top-nav,
+        .hero,
+        .content-stack section,
+        .cta-section,
+        .content-stack,
+        main {
+          margin-inline: 0;
+        }
+
+        .top-nav {
+          margin: 10px 10px 6px;
+          padding: 12px;
+          border-radius: 14px;
+        }
+
+        .top-nav__brand {
+          max-width: 56%;
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+
+        .cta-link {
+          padding: 10px 14px;
+          font-size: 0.95rem;
+        }
+
+        main {
+          padding: 10px 10px 34px;
+        }
+
+        .section-card,
+        .content-stack {
+          width: 100%;
+        }
+
+        .hero {
+          margin-top: 0;
+          padding: 24px;
+          border-radius: 18px;
+        }
+
+        .content-stack {
+          gap: 22px;
+        }
+
+        .content-stack section,
+        .cta-section {
+          padding: 20px;
+          border-radius: 18px;
+        }
+
+        .section-title {
+          font-size: 1.35rem;
+          margin-bottom: 14px;
+        }
+
+        .hero__title {
+          font-size: 1.86rem;
+          line-height: 1.22;
+        }
+
+        .hero__intro,
+        .cta-section p,
+        .benefit-list li,
+        .trust-list li,
+        .process-steps li,
+        details p,
+        summary {
+          font-size: 1rem;
+          line-height: 1.78;
+        }
+
+        .benefit-list li,
+        .trust-list li,
+        .process-steps li {
+          padding: 14px 14px 14px 44px;
+        }
+
+        .process-steps li::before {
+          left: 12px;
+          top: 15px;
+        }
+
+        .hero__actions {
+          gap: 10px;
+        }
+
+        details {
+          padding: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="section-card">
+        <nav class="top-nav" aria-label="주요 내비게이션">
+          <div class="top-nav__brand">AI 코드 어시스턴트 교육</div>
+          <div class="top-nav__links" aria-label="빠른 이동">
+            <a class="top-nav__link" href="#benefits">효과</a>
+            <a class="top-nav__link" href="#process">진행 방식</a>
+            <a class="top-nav__link" href="#trust">신뢰 근거</a>
+            <a class="top-nav__link" href="#faq">FAQ</a>
+            <a class="top-nav__link" href="#final-cta">신청하기</a>
+          </div>
+          <a class="cta-link top-nav__cta" data-role="kakao-cta" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="section-card" id="hero-wrap">
+          <section id="hero" class="hero">
+            <h1 class="hero__title">비개발자도 이해하는 실전 AI 코드 어시스턴트</h1>
+            <p class="hero__intro">실제 업무에 바로 반영할 수 있는 실습 위주의 교육으로, AI를 어렵게 느끼는 40대 학습자도 쉽게 시작할 수 있습니다. 복잡한 이론보다 실습 중심.</p>
+            <div class="hero__actions">
+              <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+            </div>
+          </section>
+        </div>
+
+        <div class="content-stack section-card">
+          <section id="benefits">
+            <h2 class="section-title">프로그램 효과</h2>
+            <ul class="benefit-list">
+              <li>반복적인 코드 작성·수정 작업 시간을 크게 단축할 수 있습니다.</li>
+              <li>실무 과제를 기반으로 바로 적용 가능한 실습을 통해 즉시 활용 가능한 역량을 키웁니다.</li>
+              <li>어려운 개념도 직관적인 단계로 풀어 설명해 부담 없이 따라올 수 있습니다.</li>
+            </ul>
+          </section>
+
+          <section id="process">
+            <h2 class="section-title">진행 방식</h2>
+            <ol class="process-steps">
+              <li data-step="1">카카오톡으로 상담 신청 후 학습 목적을 공유합니다.</li>
+              <li data-step="2">현재 수준을 점검하고 1:1 맞춤 학습 플랜을 제안합니다.</li>
+              <li data-step="3">실제 업무 상황을 반영한 수업을 진행하고 피드백을 반복합니다.</li>
+            </ol>
+          </section>
+
+          <section id="trust">
+            <h2 class="section-title">신뢰 근거</h2>
+            <ul class="trust-list">
+              <li>강사 소개: AI 코드 리뷰·자동화 경험이 풍부한 실무 경험 중심 강사가 운영합니다.</li>
+              <li>운영 방식: 상담 후 현재 실무 수준을 확인해 1:1로 맞춤 커리큘럼과 피드백 방식으로 진행합니다.</li>
+              <li>운영 철학: 기본이 약한 학습자도 업무 과제에 바로 적용할 수 있도록 단계별로 정리해 진행합니다.</li>
+              <li>학습 후기 반영: 질문/피드백을 반복하며 이해도를 확인하고, 학습 목표에 맞춰 수업을 조정합니다.</li>
+              <li>후기 요약: “AI가 어렵다고 느끼던 저에게, 한 단계씩 따라가다 보면 실무 자동화에 바로 적용할 수 있었습니다.”</li>
+              <li>후기 요약: “상담 직후 바로 제 수준에 맞는 과제부터 짚어주어 집중도가 훨씬 높아졌어요.”</li>
+            </ul>
+          </section>
+
+          <section id="faq">
+            <h2 class="section-title">자주 묻는 질문</h2>
+            <div class="faq-list">
+              <details>
+                <summary>비개발자인데 가능한가요?</summary>
+                <p>가능합니다. 기본부터 시작해 실무에서 바로 필요한 부분 위주로 진행합니다.</p>
+              </details>
+              <details>
+                <summary>어느 정도 시간이 필요한가요?</summary>
+                <p>주간 이용 가능 시간과 학습 목표에 따라 4주~8주로 맞춤 조정합니다.</p>
+              </details>
+              <details>
+                <summary>준비물은 무엇인가요?</summary>
+                <p>필수 준비물은 컴퓨터(노트북 또는 데스크톱)와 안정적인 인터넷 연결입니다. 수업 전 간단한 채팅 계정(카카오톡 계정)과 사용 가능한 환경이면 시작할 수 있습니다.</p>
+              </details>
+              <details>
+                <summary>수강 전 상담이 가능한가요?</summary>
+                <p>카카오톡으로 먼저 상담 일정을 잡아 현재 목표와 현황을 확인한 뒤, 수강 진행 여부를 함께 결정합니다.</p>
+              </details>
+            </div>
+          </section>
+
+          <section id="mid-cta" class="final-cta" aria-label="중간 상담 신청">
+            <div class="cta-section">
+              <h2>궁금한 점은 지금 바로 상담으로 확인하세요</h2>
+              <p>목표와 현재 수준을 공유하면, 맞춤 시작 플랜을 바로 제안해 드립니다.</p>
+              <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+            </div>
+          </section>
+
+          <section id="final-cta" class="final-cta">
+            <div class="cta-section">
+              <h2>지금 수준에서 시작 가능한 맞춤 안내 제공</h2>
+              <p>목표를 함께 정하면 바로 교육 시작 플랜을 안내해 드립니다.</p>
+              <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+              <p class="fallback-contact">카카오톡 연결이 원활하지 않다면 <a href="tel:010-2222-3333">010-2222-3333</a> 또는 <a href="mailto:contact@aicodeedu.co.kr">contact@aicodeedu.co.kr</a>으로 연락해주세요.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <div class="sticky-cta" aria-label="모바일 상담 액션">
+        <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
+      </div>
+    </div>
+
+    <script>
+      const KAKAO_URL = "https://open.kakao.com/";
+
+      document.querySelectorAll('[data-role="kakao-cta"]').forEach((el) => {
+        el.setAttribute("href", KAKAO_URL);
+      });
+    </script>
+  </body>
+</html>
