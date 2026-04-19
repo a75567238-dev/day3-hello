@@ -22,6 +22,10 @@
         --primary-strong: #1b4ec0;
         --outline: rgba(29, 49, 82, 0.18);
         --outline-strong: rgba(29, 49, 82, 0.3);
+        --sticky-cta-padding-y: 10px;
+        --sticky-cta-safe-area: env(safe-area-inset-bottom);
+        --sticky-cta-height: calc(var(--sticky-cta-padding-y) * 2 + var(--sticky-cta-safe-area));
+        --sticky-cta-body-padding: 0px;
       }
 
       * {
@@ -43,6 +47,7 @@
           var(--bg);
         line-height: 1.72;
         -webkit-font-smoothing: antialiased;
+        padding-bottom: var(--sticky-cta-body-padding);
       }
 
       .site-shell {
@@ -308,13 +313,12 @@
         right: 0;
         bottom: 0;
         z-index: 60;
-        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        padding: var(--sticky-cta-padding-y) 16px calc(var(--sticky-cta-padding-y) + var(--sticky-cta-safe-area));
         background: rgba(255, 255, 255, 0.96);
         border-top: 1px solid var(--outline);
         box-shadow: 0 -8px 22px rgba(16, 32, 63, 0.09);
         display: none;
       }
-
       .sticky-cta .cta-link {
         width: 100%;
         text-align: center;
@@ -326,6 +330,11 @@
         font-size: 0.95rem;
         line-height: 1.65;
         color: var(--text-muted);
+      }
+
+      .fallback-contact a {
+        color: inherit;
+        text-decoration: underline;
       }
 
       @media (max-width: 760px) {
@@ -342,8 +351,8 @@
           display: block;
         }
 
-        body {
-          padding-bottom: 74px;
+        :root {
+          --sticky-cta-body-padding: var(--sticky-cta-height);
         }
 
         main {
@@ -370,10 +379,6 @@
         .content-stack,
         main {
           margin-inline: 0;
-        }
-
-        body {
-          padding-bottom: 74px;
         }
 
         .top-nav {
@@ -465,7 +470,7 @@
       <header class="section-card">
         <nav class="top-nav" aria-label="주요 내비게이션">
           <div class="top-nav__brand">AI 코드 어시스턴트 교육</div>
-          <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/o/example">카카오톡으로 상담받기</a>
+          <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/o/example" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
         </nav>
       </header>
 
@@ -544,7 +549,7 @@
               <h2>지금 수준에서 시작 가능한 맞춤 안내 제공</h2>
               <p>목표를 함께 정하면 바로 교육 시작 플랜을 안내해 드립니다.</p>
               <a class="cta-link" data-role="kakao-cta" href="https://open.kakao.com/o/example" target="_blank" rel="noopener noreferrer">카카오톡으로 상담받기</a>
-              <p class="fallback-contact">카카오톡 연결이 원활하지 않다면 010-1234-5678 또는 sample@example.com 으로 연락해주세요.</p>
+              <p class="fallback-contact">카카오톡 연결이 원활하지 않다면 <a href="tel:010-1234-5678">010-1234-5678</a> 또는 <a href="mailto:sample@example.com">sample@example.com</a>으로 연락해주세요.</p>
             </div>
           </section>
         </div>
